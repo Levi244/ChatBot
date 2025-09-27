@@ -18,36 +18,41 @@
     function ChatInput(){
         return (
             <div>
-                <input type="text" placeholder="Envie a mensagem ao Bot" size="30"/>
-                <button>Envie</button>
+                <input type="text" placeholder="Send a message to Chatbot" size="30"/>
+                <button>Send</button>
             </div>
         );
     };
 
-    function ChatMessage(){
-        return(
-            <div>
-                Hello!
-                <img src="./assets/user.png" width="50"/>
+    function ChatMessage({ message,sender }){
+     
+        if(sender === 'robot'){
+            return(
+                <div>
+                <img src="./assets/robot.png" width="50"/>
+                {message}
            </div>
-        );
-    };
+            );
+        };
 
-    function ChatMessage(){
         return(
-            <div>
-                Hello!
-                <img src="./assets/user.png" width="50"/>
+                <div>
+                {sender === 'robot' && <img src="./assets/robot.png" width="50"/>}
+                {message}
+                {sender === 'user' && <img src="./assets/user.png" width="50"/>}
            </div>
-        );
-    };
+            );
+    }
+
 
     function App() {
         return (
             <>
                 <ChatInput/>
-                <ChatMessage/>
-                <ChatMessage/>
+                <ChatMessage message="Hello!" sender="user"/>
+                <ChatMessage message="Hello! How can in help you?" sender="robot"/>
+                <ChatMessage message="Flip a coin" sender="user"/>
+                <ChatMessage message="Sure! You got tails" sender="robot"/>
             </>
         );
     };
